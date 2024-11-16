@@ -21,6 +21,7 @@ import { useSession } from "next-auth/react"
 import { getBookings } from "../_actions/get-bookings"
 import { Dialog, DialogContent } from "@/components/ui/dialog"
 import SignInDialog from "./sign-in-dialog"
+import { toast } from "sonner"
 
 interface ServiceItemProps {
   service: BarbershopService
@@ -109,10 +110,10 @@ const ServiceItem = ({ service, barbershop }: ServiceItemProps) => {
     try {
       await createBooking({ serviceId: service.id, date: newDate })
       handleBookingSheetOpenChange()
-      alert("Reserva criada com sucesso!")
+      toast.success("Reserva criada com sucesso!")
     } catch (error) {
       console.error(error)
-      alert("Ocorreu um erro ao criar a reserva.")
+      toast.error("Ocorreu um erro ao criar a reserva.")
     }
   }
 
